@@ -7,12 +7,9 @@ jobs:
     - uses: actions/checkout@v1
     
     - name: On my_custom_webhook do ABC...
-      if: github.event.action == 'my_custom_webhook'
+      env:
+        LAST_HIT_CI_PARAMS: ${{ toJson(github.event.client_payload) }}
+      if: github.event.action == 'LAST_HIT_CI'
       run: |
         echo "Hello From my_custom_webhook...doing ABC"
-        echo ${{ github.event.client_payload.unit }}
-        
-    - name: On my_custom_webhook do XYZ...
-      if: github.event.action == 'my_custom_webhook_2'
-      run: |
-        echo "Hello From my_custom_webhook_2...doing XYZ"
+        echo "$LAST_HIT_CI_PARAMS"

@@ -10,6 +10,7 @@ jobs:
       if: github.event.action == 'my_custom_webhook'
       run: |
         echo "Hello From my_custom_webhook...doing ABC"
+        echo ${{ github.event.client_payload.unit }}
         
     - name: On my_custom_webhook do XYZ...
       if: github.event.action == 'my_custom_webhook_2'
